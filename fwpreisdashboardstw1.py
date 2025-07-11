@@ -1,4 +1,6 @@
 import streamlit as st
+import pdfkit
+import base64
 
 # Farbdefinitionen (angepasst)
 KRÄFTIG_ORANGE = "#FF6A00"  # Kräftiges Orange ohne Schwarzanteil
@@ -40,19 +42,21 @@ st.markdown(
         font-size: 16px !important;
     }}
     .stTextInput input,
-    .stNumberInput input {{
+    .stNumberInput input,
+    .stSelectbox div[data-baseweb="select"] div {{
         background-color: white !important;
         border: 3px solid {KRÄFTIG_ORANGE} !important;
         color: {DUNKELGRAU} !important;
         font-weight: 600 !important;
         font-size: 16px !important;
     }}
-    .stSelectbox div[data-baseweb="select"] {{
+    .stSelectbox > div {{
         background-color: white !important;
         border: 3px solid {KRÄFTIG_ORANGE} !important;
-        color: {DUNKELGRAU} !important;
-        font-weight: 600 !important;
+        border-radius: 8px !important;
         font-size: 16px !important;
+        font-weight: 600 !important;
+        color: {DUNKELGRAU} !important;
     }}
     label, .stTextInput label, .stNumberInput label {{
         color: {DUNKELGRAU} !important;
@@ -110,14 +114,14 @@ funktion = st.selectbox("Funktion auswählen:", [
 if funktion == "Heizöl → kWh & kW":
     liter = st.number_input("Verbrauch in Liter Heizöl pro Jahr:", min_value=0.0, step=10.0)
     if liter:
-        kwh = liter * 10.0  # Heizwert ca. 10 kWh/l
+        kwh = liter * 10.0
         kw = kwh / 1400
         st.success(f"Entspricht {kwh:.0f} kWh und einer Heizleistung von {kw:.2f} kW bei 1400h/Jahr")
 
 elif funktion == "Pellets → kWh & kW":
     tonnen = st.number_input("Verbrauch in Tonnen Pellets pro Jahr:", min_value=0.0, step=0.1)
     if tonnen:
-        kwh = tonnen * 4800  # ca. 4.8 MWh/t
+        kwh = tonnen * 4800
         kw = kwh / 1400
         st.success(f"Entspricht {kwh:.0f} kWh und einer Heizleistung von {kw:.2f} kW bei 1400h/Jahr")
 
@@ -172,17 +176,19 @@ elif funktion == "Fernwärmekostenberechnung":
         brutto_gesamt = netto_gesamt + mehrwertsteuer
 
         st.subheader("Ausgabe auf Basis Preisblatt gültig ab 01.09.2024 – rabattiert – nach")
-        st.success(f"""
-        Energiekosten: {energiekosten:.2f} €  
-        Grundpreis: {grundkosten:.2f} €  
-        Messleistungskosten: {messleistungskosten:.2f} €  
-        Wärmezählerkosten: {waermezaehler_kosten:.2f} €  
-        Öko- und Umweltbeitrag: {oekobeitrag:.2f} €  
-        Benutzungsabgabe (6%): {benutzungsabgabe:.2f} €  
-        Netto gesamt: {netto_gesamt:.2f} €  
-        Mehrwertsteuer (20%): {mehrwertsteuer:.2f} €  
-        **Bruttokosten pro Jahr: {brutto_gesamt:.2f} €**
-        """)
+        ausgabe_text = f"""
+        <h3>Ergebnisse</h3>
+        <p><b>Energiekosten:</b> {energiekosten:.2f} €<br>
+        <b>Grundpreis:</b> {grundkosten:.2f} €<br>
+        <b>Messleistungskosten:</b> {messleistungskosten:.2f} €<br>
+        <b>Wärmezählerkosten:</b> {waermezaehler_kosten:.2f} €<br>
+        <b>Öko- und Umweltbeitrag:</b> {oekobeitrag:.2f} €<br>
+        <b>Benutzungsabgabe (6%):</b> {benutzungsabgabe:.2f} €<br>
+        <b>Netto gesamt:</b> {netto_gesamt:.2f} €<br>
+        <b>Mehrwertsteuer (20%):</b> {mehrwertsteuer:.2f} €<br>
+        <b><u>Bruttokosten pro Jahr:</u></b> {brutto_gesamt:.2f} €</p>
+        """
+        st.markdown(ausgabe_text, unsafe_allow_html=True)
 
         st.info("Hinweis: Diese Berechnung basiert auf den eingegebenen Werten und aktuellen Tarifinformationen. "
                 "Sie stellt keine rechtsverbindliche Auskunft dar und dient ausschließlich einer Prognose. "
