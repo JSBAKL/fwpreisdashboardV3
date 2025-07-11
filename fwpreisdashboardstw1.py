@@ -39,21 +39,19 @@ st.markdown(
         font-weight: 600 !important;
         font-size: 16px !important;
     }}
-    .stTextInput input,
-    .stNumberInput input,
-    .stSelectbox div[data-baseweb="select"] div {{
+    div[data-baseweb="select"] {{
         background-color: white !important;
+        color: {DUNKELGRAU} !important;
         border: 1.5px solid {KRÄFTIG_ORANGE} !important;
+        border-radius: 8px !important;
+        box-shadow: none !important;
+    }}
+    div[data-baseweb="select"] * {{
         color: {DUNKELGRAU} !important;
         font-weight: 600 !important;
         font-size: 16px !important;
     }}
-    .stSelectbox > div {{
-        background-color: white !important;
-        border: 1.2px solid {KRÄFTIG_ORANGE} !important;
-        border-radius: 6px !important;
-        font-size: 16px !important;
-        font-weight: 600 !important;
+    .css-1dimb5e-singleValue {{
         color: {DUNKELGRAU} !important;
     }}
     label, .stTextInput label, .stNumberInput label {{
@@ -107,29 +105,19 @@ if not st.session_state.passwort_ok:
         st.stop()
 
 st.markdown("""
-<style>
-.funktion-box .stSelectbox > div {
-    border: 1px solid #FFA366 !important;
-    border-radius: 6px !important;
-    padding: 6px !important;
-    background-color: white !important;
-}
-</style>
-""", unsafe_allow_html=True)
-
-with st.container():
-    st.markdown("### 📌 Bitte gewünschte Funktion auswählen:")
-    funktion = st.selectbox(
-        "",
-        [
-            "Fernwärmekostenberechnung",
-            "Heizöl → kWh & kW",
-            "Pellets → kWh & kW",
-            "kWh → Heizöl",
-            "kWh → Pellets"
-        ],
-        key="funktion-box"
-    )
+### 📌 Bitte gewünschte Funktion auswählen:
+""")
+funktion = st.selectbox(
+    "",
+    [
+        "Fernwärmekostenberechnung",
+        "Heizöl → kWh & kW",
+        "Pellets → kWh & kW",
+        "kWh → Heizöl",
+        "kWh → Pellets"
+    ],
+    key="funktion-box"
+)
 
 if funktion == "Heizöl → kWh & kW":
     liter = st.number_input("Verbrauch in Liter Heizöl pro Jahr:", min_value=0.0, step=10.0)
