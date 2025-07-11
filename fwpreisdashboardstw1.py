@@ -34,7 +34,7 @@ st.markdown(
     }}
     input[type="text"], input[type="number"], input[type="password"] {{
         background-color: white !important;
-        border: 3px solid {KRÄFTIG_ORANGE} !important;
+        border: 2px solid {KRÄFTIG_ORANGE} !important;
         color: {DUNKELGRAU} !important;
         font-weight: 600 !important;
         font-size: 16px !important;
@@ -43,15 +43,15 @@ st.markdown(
     .stNumberInput input,
     .stSelectbox div[data-baseweb="select"] div {{
         background-color: white !important;
-        border: 3px solid {KRÄFTIG_ORANGE} !important;
+        border: 1.5px solid {KRÄFTIG_ORANGE} !important;
         color: {DUNKELGRAU} !important;
         font-weight: 600 !important;
         font-size: 16px !important;
     }}
     .stSelectbox > div {{
         background-color: white !important;
-        border: 3px solid {KRÄFTIG_ORANGE} !important;
-        border-radius: 8px !important;
+        border: 1.5px solid {KRÄFTIG_ORANGE} !important;
+        border-radius: 6px !important;
         font-size: 16px !important;
         font-weight: 600 !important;
         color: {DUNKELGRAU} !important;
@@ -89,22 +89,41 @@ if "passwort_ok" not in st.session_state:
     st.session_state.passwort_ok = False
 
 if not st.session_state.passwort_ok:
+    st.markdown("### 🔐 Zugang erforderlich")
     pass_eingabe = st.text_input("Bitte Passwort eingeben:", type="password")
-    if pass_eingabe == PASSWORT:
-        st.session_state.passwort_ok = True
-        st.success("Zugang gewährt. Die App wird jetzt freigeschaltet.")
-        st.stop()
-    elif pass_eingabe:
-        st.warning("Zugriff verweigert. Bitte gültiges Passwort eingeben.")
+
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
+        login = st.button("Einloggen")
+
+    if login:
+        if pass_eingabe == PASSWORT:
+            st.session_state.passwort_ok = True
+            st.success("✅ Zugang gewährt. Die App wird jetzt freigeschaltet.")
+            st.experimental_rerun()
+        else:
+            st.warning("❌ Zugriff verweigert. Bitte gültiges Passwort eingeben.")
     st.stop()
 
-funktion = st.selectbox("Funktion auswählen:", [
-    "Fernwärmekostenberechnung",
-    "Heizöl → kWh & kW",
-    "Pellets → kWh & kW",
-    "kWh → Heizöl",
-    "kWh → Pellets"
-])
+st.markdown("""
+<style>
+.stSelectbox label {
+    font-weight: 700 !important;
+    font-size: 18px !important;
+}
+</style>
+""", unsafe_allow_html=True)
+
+funktion = st.selectbox(
+    "Bitte gewünschte Funktion auswählen:",
+    [
+        "Fernwärmekostenberechnung",
+        "Heizöl → kWh & kW",
+        "Pellets → kWh & kW",
+        "kWh → Heizöl",
+        "kWh → Pellets"
+    ]
+)
 
 if funktion == "Heizöl → kWh & kW":
     liter = st.number_input("Verbrauch in Liter Heizöl pro Jahr:", min_value=0.0, step=10.0)
