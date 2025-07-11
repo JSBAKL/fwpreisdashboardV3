@@ -135,4 +135,3 @@ if anschlussleistung_kw > 0 and verbrauch_kwh > 0:
         st.write(f"{mehrwertsteuer:10.2f} €")
         st.markdown("---")
         st.success(f"{brutto_gesamt:10.2f} € / Jahr")
-
