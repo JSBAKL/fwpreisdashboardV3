@@ -1,12 +1,10 @@
 import streamlit as st
 
-# Farbdefinitionen (STW-Farben)
-STW_TUERKIS = "#00B2A9"
-STW_ORANGE = "#F39200"
-DUNKELGRAU = "#333333"  # dunkleres Grau
-HINTERGRUND = "#F9F9F9"
+# Farbdefinitionen (angepasst)
+KRÄFTIG_ORANGE = "#FF6A00"  # Kräftiges Orange ohne Schwarzanteil
+DUNKELGRAU = "#333333"         # Gut lesbares Dunkelgrau
+HINTERGRUND = "#F9F9F9"       # Heller Hintergrund
 
-# --- Design-Anpassung via HTML/CSS ---
 # --- Design-Anpassung via HTML/CSS ---
 st.markdown(
     f"""
@@ -19,36 +17,40 @@ st.markdown(
         background-color: {HINTERGRUND};
     }}
     h1, h2, h3 {{
-        color: {STW_ORANGE};
+        color: {KRÄFTIG_ORANGE};
     }}
     .block-container {{
         padding-top: 2rem;
         padding-bottom: 2rem;
     }}
     .stButton > button {{
-        background-color: {STW_TUERKIS};
+        background-color: {KRÄFTIG_ORANGE};
         color: white;
         border-radius: 8px;
     }}
     input {{
         background-color: white !important;
-        border: 4px solid {STW_ORANGE} !important;
+        border: 3px solid {KRÄFTIG_ORANGE} !important;
         color: {DUNKELGRAU} !important;
         font-weight: 600 !important;
         font-size: 16px !important;
     }}
-    .stTextInput > div > input, .stNumberInput input {{
-        border: 4px solid {STW_ORANGE} !important;
-        color: {DUNKELGRAU} !important;
+    .stTextInput input,
+    .stNumberInput input {{
         background-color: white !important;
+        border: 3px solid {KRÄFTIG_ORANGE} !important;
+        color: {DUNKELGRAU} !important;
         font-weight: 600 !important;
         font-size: 16px !important;
+    }}
+    label, .stTextInput label, .stNumberInput label {{
+        color: {DUNKELGRAU} !important;
+        font-weight: 600;
     }}
     </style>
     """,
     unsafe_allow_html=True
 )
-
 
 # --- Passwortschutz ---
 PASSWORT = "fernwaerme2025"
