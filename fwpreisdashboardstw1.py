@@ -50,7 +50,7 @@ st.markdown(
     }}
     .stSelectbox > div {{
         background-color: white !important;
-        border: 1.5px solid {KRÄFTIG_ORANGE} !important;
+        border: 1.2px solid {KRÄFTIG_ORANGE} !important;
         border-radius: 6px !important;
         font-size: 16px !important;
         font-weight: 600 !important;
@@ -96,34 +96,40 @@ if not st.session_state.passwort_ok:
     with col2:
         login = st.button("Einloggen")
 
-    if login:
-        if pass_eingabe == PASSWORT:
-            st.session_state.passwort_ok = True
-            st.success("✅ Zugang gewährt. Die App wird jetzt freigeschaltet.")
-            st.experimental_rerun()
-        else:
-            st.warning("❌ Zugriff verweigert. Bitte gültiges Passwort eingeben.")
-    st.stop()
+    if login and pass_eingabe == PASSWORT:
+        st.session_state.passwort_ok = True
+        st.success("✅ Zugang gewährt. Die App ist freigeschaltet.")
+    elif login and pass_eingabe != PASSWORT:
+        st.warning("❌ Zugriff verweigert. Bitte gültiges Passwort eingeben.")
+        st.stop()
+
+    if not st.session_state.passwort_ok:
+        st.stop()
 
 st.markdown("""
 <style>
-.stSelectbox label {
-    font-weight: 700 !important;
-    font-size: 18px !important;
+.funktion-box .stSelectbox > div {
+    border: 1px solid #FFA366 !important;
+    border-radius: 6px !important;
+    padding: 6px !important;
+    background-color: white !important;
 }
 </style>
 """, unsafe_allow_html=True)
 
-funktion = st.selectbox(
-    "Bitte gewünschte Funktion auswählen:",
-    [
-        "Fernwärmekostenberechnung",
-        "Heizöl → kWh & kW",
-        "Pellets → kWh & kW",
-        "kWh → Heizöl",
-        "kWh → Pellets"
-    ]
-)
+with st.container():
+    st.markdown("### 📌 Bitte gewünschte Funktion auswählen:")
+    funktion = st.selectbox(
+        "",
+        [
+            "Fernwärmekostenberechnung",
+            "Heizöl → kWh & kW",
+            "Pellets → kWh & kW",
+            "kWh → Heizöl",
+            "kWh → Pellets"
+        ],
+        key="funktion-box"
+    )
 
 if funktion == "Heizöl → kWh & kW":
     liter = st.number_input("Verbrauch in Liter Heizöl pro Jahr:", min_value=0.0, step=10.0)
