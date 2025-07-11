@@ -84,7 +84,7 @@ if pass_eingabe != PASSWORT:
 
 # --- Titel ---
 st.title("Fernwärmekostenberechnung pro Jahr")
-st.subheader("Ausgabe auf Basis Preisblatt gültig ab 010924 -rabattiert-nach")
+st.subheader("Ausgabe auf Basis Preisblatt gültig ab 010924-rabattiert-nach")
 
 # --- Konstante Preise ---
 ENERGIEPREIS_CENT_PRO_KWH = 8.0469     # in Cent
