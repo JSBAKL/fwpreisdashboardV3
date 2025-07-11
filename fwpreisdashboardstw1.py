@@ -61,25 +61,24 @@ st.markdown(
         background-color: #FFEFE0 !important;
         color: #333333 !important;
     }}
-div[data-baseweb="popover"] {{
-    background-color: white !important;
-    color: {WHITE} !important;
-    border: 1.5px solid {KRÄFTIG_ORANGE} !important;
-    border-radius: 6px !important;
-}}
-
-.css-1xc3v61-menu {{
-    background-color: white !important;
-    border: 1.5px solid {KRÄFTIG_ORANGE} !important;
-    border-radius: 6px !important;
-    color: {DUNKELGRAU} !important;
-}}
-
-.css-1n76uvr-control {{
-    background-color: white !important;
-    color: {DUNKELGRAU} !important;
-}}
-
+    div[data-baseweb="popover"] {{
+        background-color: white !important;
+        color: {DUNKELGRAU} !important;
+        border: 1.5px solid {KRÄFTIG_ORANGE} !important;
+        border-radius: 6px !important;
+    }}
+    .css-1dimb5e-singleValue {{
+        color: {DUNKELGRAU} !important;
+    }}
+    .css-1xc3v61-menu {{
+        background-color: white !important;
+        border: 1.5px solid {KRÄFTIG_ORANGE} !important;
+        border-radius: 6px !important;
+        color: {DUNKELGRAU} !important;
+    }}
+    .css-1n76uvr-control {{
+        background-color: white !important;
+        color: {DUNKELGRAU} !important;
     }}
     label, .stTextInput label, .stNumberInput label {{
         color: {DUNKELGRAU} !important;
@@ -115,7 +114,7 @@ if "passwort_ok" not in st.session_state:
 
 if not st.session_state.passwort_ok:
     st.markdown("### 🔐 Zugang erforderlich")
-    pass_eingabe = st.text_input("Bitte Passwort eingeben:", type="password")
+    pass_eingabe = st.text_input("Bitte Passwort eingeben:", value="", type="password")
 
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
@@ -135,8 +134,8 @@ st.markdown("""
 ### 📌 Bitte gewünschte Funktion auswählen:
 """)
 funktion = st.selectbox(
-    "",
-    [
+    label="Funktion auswählen",
+    options=[
         "Fernwärmekostenberechnung",
         "Heizöl → kWh & kW",
         "Pellets → kWh & kW",
