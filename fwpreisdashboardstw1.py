@@ -16,8 +16,9 @@ st.markdown(
     .stApp {{
         background-color: {HINTERGRUND};
     }}
-    h1, h2, h3 {{
-        color: {KRÄFTIG_ORANGE};
+    h1, h2, h3, .stMarkdown h2, .stMarkdown h3 {{
+        color: {KRÄFTIG_ORANGE} !important;
+        font-weight: 700 !important;
     }}
     .block-container {{
         padding-top: 2rem;
@@ -45,7 +46,24 @@ st.markdown(
     }}
     label, .stTextInput label, .stNumberInput label {{
         color: {DUNKELGRAU} !important;
-        font-weight: 600;
+        font-weight: 600 !important;
+    }}
+    .stColumn div p, .stColumn div {{
+        color: {DUNKELGRAU} !important;
+        font-size: 17px !important;
+        font-weight: 600 !important;
+    }}
+    div, p, .markdown-text-container, .stMarkdown {{
+        color: {DUNKELGRAU} !important;
+        font-size: 17px !important;
+        font-weight: 500;
+    }}
+    .stSuccess {{
+        background-color: white !important;
+        border: 3px solid {KRÄFTIG_ORANGE} !important;
+        color: {DUNKELGRAU} !important;
+        font-weight: 700 !important;
+        font-size: 18px !important;
     }}
     </style>
     """,
