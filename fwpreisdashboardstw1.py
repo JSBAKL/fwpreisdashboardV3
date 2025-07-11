@@ -16,21 +16,13 @@ st.markdown(
     .stApp {{
         background-color: {HINTERGRUND};
     }}
-    h1 {{
+    h1, h2, h3 {{
         color: {KRÄFTIG_ORANGE};
-        font-size: 28px !important;
-        font-weight: 700 !important;
+        font-weight: 600;
     }}
-    h2 {{
-        color: {KRÄFTIG_ORANGE};
-        font-size: 20px !important;
-        font-weight: 600 !important;
-    }}
-    h3 {{
-        color: {KRÄFTIG_ORANGE};
-        font-size: 18px !important;
-        font-weight: 600 !important;
-    }}
+    h1 {{ font-size: 28px !important; }}
+    h2 {{ font-size: 20px !important; }}
+    h3 {{ font-size: 18px !important; }}
     .block-container {{
         padding-top: 2rem;
         padding-bottom: 2rem;
@@ -59,15 +51,24 @@ st.markdown(
         color: {DUNKELGRAU} !important;
         font-weight: 600;
     }}
-    div, p, .markdown-text-container, .stMarkdown, .stSuccess {{
+    div, p, .markdown-text-container, .stMarkdown {{
         color: {DUNKELGRAU} !important;
         font-size: 17px !important;
         font-weight: 500;
     }}
     .stSuccess {{
-        background-color: #FFFFFF !important;
+        background-color: #FFF5E6 !important;
         border: 2px solid {KRÄFTIG_ORANGE} !important;
         color: {DUNKELGRAU} !important;
+        font-size: 18px !important;
+        font-weight: 600 !important;
+    }}
+    .stInfo {{
+        background-color: #F0F0F0 !important;
+        border: 2px solid {KRÄFTIG_ORANGE} !important;
+        color: {DUNKELGRAU} !important;
+        font-size: 17px !important;
+        font-weight: 500 !important;
     }}
     </style>
     """,
