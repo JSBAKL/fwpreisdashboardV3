@@ -2,7 +2,8 @@ import streamlit as st
 
 # Farbdefinitionen (STW-Farben)
 STW_TUERKIS = "#00B2A9"
-DUNKELGRAU = "#333333"
+STW_ORANGE = "#F39200"
+DUNKELGRAU = "#222222"
 HINTERGRUND = "#F9F9F9"
 
 # --- Design-Anpassung via HTML/CSS ---
@@ -10,14 +11,14 @@ st.markdown(
     f"""
     <style>
     body {{
-        background-color: #EFEFEF;
-        color: #000000;
+        background-color: {HINTERGRUND};
+        color: {DUNKELGRAU};
     }}
     .stApp {{
-        background-color: #EFEFEF;
+        background-color: {HINTERGRUND};
     }}
     h1, h2, h3 {{
-        color: {STW_TUERKIS};
+        color: {STW_ORANGE};
     }}
     .block-container {{
         padding-top: 2rem;
@@ -27,31 +28,33 @@ st.markdown(
         background-color: {STW_TUERKIS};
         color: white;
         border-radius: 8px;
-        border: none;
-        padding: 0.5em 1.5em;
-        font-weight: bold;
-        transition: 0.3s;
     }}
-    .stButton > button:hover {{
-        background-color: #00938D;
-        color: #fff;
+    input {{
+        background-color: white !important;
+        border: 2px solid {STW_ORANGE} !important;
+        color: {DUNKELGRAU} !important;
+    }}
+    .stTextInput input {{
+        border: 2px solid {STW_ORANGE};
+    }}
+    .stNumberInput input {{
+        border: 2px solid {STW_ORANGE};
     }}
     </style>
     """,
     unsafe_allow_html=True
 )
 
-
 # --- Passwortschutz ---
 PASSWORT = "fernwaerme2025"
-pass_eingabe = st.text_input("🔒 Bitte Passwort eingeben:", type="password")
+pass_eingabe = st.text_input("Bitte Passwort eingeben:", type="password")
 
 if pass_eingabe != PASSWORT:
     st.warning("Zugriff verweigert. Bitte gültiges Passwort eingeben.")
     st.stop()
 
 # --- Titel ---
-st.title("💡 Fernwärmekostenberechnung pro Jahr")
+st.title("Fernwärmekostenberechnung pro Jahr")
 
 # --- Konstante Preise ---
 ENERGIEPREIS_CENT_PRO_KWH = 8.0469     # in Cent
@@ -75,8 +78,8 @@ def berechne_messleistungskosten(anschlussleistung_kw):
         return 28.6027 * 12
 
 # --- Benutzereingabe ---
-anschlussleistung_kw = st.number_input("🔌 Anschlussleistung (kW):", min_value=0.0, format="%.2f")
-verbrauch_kwh = st.number_input("🔥 Jahresverbrauch (kWh):", min_value=0.0, format="%.2f")
+anschlussleistung_kw = st.number_input("Anschlussleistung (kW):", min_value=0.0, format="%.2f")
+verbrauch_kwh = st.number_input("Jahresverbrauch (kWh):", min_value=0.0, format="%.2f")
 
 if anschlussleistung_kw > 0 and verbrauch_kwh > 0:
     # Einzelkosten berechnen
@@ -96,7 +99,7 @@ if anschlussleistung_kw > 0 and verbrauch_kwh > 0:
     brutto_gesamt = netto_gesamt + mehrwertsteuer
 
     # --- Ausgabe ---
-    st.subheader("📊 Kostenaufstellung Fernwärme")
+    st.subheader("Kostenaufstellung Fernwärme")
     col1, col2 = st.columns(2)
     with col1:
         st.write(f"Energiekosten:")
@@ -125,3 +128,4 @@ if anschlussleistung_kw > 0 and verbrauch_kwh > 0:
         st.write(f"{mehrwertsteuer:10.2f} €")
         st.markdown("---")
         st.success(f"{brutto_gesamt:10.2f} € / Jahr")
+
