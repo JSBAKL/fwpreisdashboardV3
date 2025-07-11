@@ -41,21 +41,22 @@ st.markdown(
     }}
     div[data-baseweb="select"] {{
         background-color: white !important;
-        color: {DUNKELGRAU} !important;
         border: 1.5px solid {KRÄFTIG_ORANGE} !important;
-        border-radius: 8px !important;
+        border-radius: 6px !important;
         box-shadow: none !important;
+        padding: 2px !important;
+        min-height: 38px !important;
     }}
     div[data-baseweb="select"] * {{
         color: {DUNKELGRAU} !important;
-        font-weight: 600 !important;
+        font-weight: 500 !important;
         font-size: 16px !important;
+        background-color: white !important;
     }}
     div[data-baseweb="select"]:focus-within {{
-        background-color: white !important;
-        color: {DUNKELGRAU} !important;
         border: 1.5px solid {KRÄFTIG_ORANGE} !important;
-        box-shadow: none !important;
+        box-shadow: 0 0 0 2px rgba(255, 106, 0, 0.2) !important;
+        background-color: white !important;
     }}
     .css-1dimb5e-singleValue {{
         color: {DUNKELGRAU} !important;
