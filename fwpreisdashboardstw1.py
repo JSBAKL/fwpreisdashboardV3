@@ -1,3 +1,11 @@
+import streamlit as st
+
+# Farbdefinitionen (angepasst)
+KRÄFTIG_ORANGE = "#FF6A00"  # Kräftiges Orange ohne Schwarzanteil
+DUNKELGRAU = "#333333"         # Gut lesbares Dunkelgrau
+HINTERGRUND = "#F9F9F9"       # Heller Hintergrund
+
+# --- Design-Anpassung via HTML/CSS ---
 st.markdown(
     f"""
     <style>
@@ -66,7 +74,6 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
 
 # --- Passwortschutz ---
 PASSWORT = "fernwaerme2025"
