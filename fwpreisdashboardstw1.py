@@ -39,47 +39,6 @@ st.markdown(
         font-weight: 600 !important;
         font-size: 16px !important;
     }}
-    div[data-baseweb="select"] {{
-        background-color: white !important;
-        border: 1.5px solid {KRÄFTIG_ORANGE} !important;
-        border-radius: 6px !important;
-        box-shadow: none !important;
-        padding: 2px !important;
-        min-height: 38px !important;
-    }}
-    div[data-baseweb="select"] * {{
-        color: {DUNKELGRAU} !important;
-        font-weight: 500 !important;
-        font-size: 16px !important;
-    }}
-    div[data-baseweb="select"] div[role="option"] {{
-        background-color: white !important;
-        color: {DUNKELGRAU} !important;
-    }}
-    div[data-baseweb="select"] div[role="option"]:hover,
-    div[data-baseweb="select"] div[role="option"][aria-selected="true"] {{
-        background-color: #FFEFE0 !important;
-        color: #333333 !important;
-    }}
-    div[data-baseweb="popover"] {{
-        background-color: white !important;
-        color: {DUNKELGRAU} !important;
-        border: 1.5px solid {KRÄFTIG_ORANGE} !important;
-        border-radius: 6px !important;
-    }}
-    .css-1dimb5e-singleValue {{
-        color: {DUNKELGRAU} !important;
-    }}
-    .css-1xc3v61-menu {{
-        background-color: white !important;
-        border: 1.5px solid {KRÄFTIG_ORANGE} !important;
-        border-radius: 6px !important;
-        color: {DUNKELGRAU} !important;
-    }}
-    .css-1n76uvr-control {{
-        background-color: white !important;
-        color: {DUNKELGRAU} !important;
-    }}
     label, .stTextInput label, .stNumberInput label {{
         color: {DUNKELGRAU} !important;
         font-weight: 600;
@@ -133,17 +92,20 @@ if not st.session_state.passwort_ok:
 st.markdown("""
 ### 📌 Bitte gewünschte Funktion auswählen:
 """)
-funktion = st.selectbox(
-    label="Funktion auswählen",
-    options=[
-        "Fernwärmekostenberechnung",
-        "Heizöl → kWh & kW",
-        "Pellets → kWh & kW",
-        "kWh → Heizöl",
-        "kWh → Pellets"
-    ],
-    key="funktion-box"
-)
+
+funktionen = {
+    "Fernwärmekostenberechnung": "Fernwärmekostenberechnung",
+    "Heizöl → kWh & kW": "Heizöl → kWh & kW",
+    "Pellets → kWh & kW": "Pellets → kWh & kW",
+    "kWh → Heizöl": "kWh → Heizöl",
+    "kWh → Pellets": "kWh → Pellets"
+}
+
+funktion = None
+for key in funktionen:
+    if st.checkbox(key):
+        funktion = key
+        break
 
 if funktion == "Heizöl → kWh & kW":
     liter = st.number_input("Verbrauch in Liter Heizöl pro Jahr:", min_value=0.0, step=10.0)
@@ -224,4 +186,5 @@ elif funktion == "Fernwärmekostenberechnung":
         st.info("Hinweis: Diese Berechnung basiert auf den eingegebenen Werten und aktuellen Tarifinformationen. "
                 "Sie stellt keine rechtsverbindliche Auskunft dar und dient ausschließlich einer Prognose. "
                 "Fehler in den Daten können nicht ausgeschlossen werden.")
+
 
