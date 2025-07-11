@@ -158,3 +158,10 @@ if anschlussleistung_kw > 0 and verbrauch_kwh > 0:
         st.write(f"{mehrwertsteuer:10.2f} €")
         st.markdown("---")
         st.success(f"{brutto_gesamt:10.2f} € / Jahr")
+
+    # --- Hinweistext ---
+    st.markdown("""
+    <div style='margin-top: 2rem; color: #666666; font-size: 15px;'>
+        <em>Hinweis: Diese Berechnung basiert auf den eingegebenen Werten und aktuellen Tarifinformationen. Sie stellt keine rechtsverbindliche Auskunft dar und dient ausschließlich einer Prognose. Fehler in den Daten können nicht ausgeschlossen werden.</em>
+    </div>
+    """, unsafe_allow_html=True)
