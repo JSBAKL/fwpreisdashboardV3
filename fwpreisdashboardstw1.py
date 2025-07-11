@@ -51,12 +51,21 @@ st.markdown(
         color: {DUNKELGRAU} !important;
         font-weight: 500 !important;
         font-size: 16px !important;
-        background-color: white !important;
     }}
-    div[data-baseweb="select"]:focus-within {{
-        border: 1.5px solid {KRÄFTIG_ORANGE} !important;
-        box-shadow: 0 0 0 2px rgba(255, 106, 0, 0.2) !important;
+    div[data-baseweb="select"] div[role="option"] {{
         background-color: white !important;
+        color: {DUNKELGRAU} !important;
+    }}
+    div[data-baseweb="select"] div[role="option"]:hover,
+    div[data-baseweb="select"] div[role="option"][aria-selected="true"] {{
+        background-color: #FFEFE0 !important;
+        color: #333333 !important;
+    }}
+    div[data-baseweb="popover"] {{
+        background-color: white !important;
+        color: #333333 !important;
+        border: 1.5px solid {KRÄFTIG_ORANGE} !important;
+        border-radius: 6px !important;
     }}
     .css-1dimb5e-singleValue {{
         color: {DUNKELGRAU} !important;
@@ -161,7 +170,6 @@ elif funktion == "Fernwärmekostenberechnung":
     ENERGIEPREIS_CENT_PRO_KWH = 8.0469
     GRUNDPREIS_EURO_PRO_KW_JAHR = 42.9324
     WAERMEZAEHLER_MONATLICH = 2.8414
-    OEKO_SATZ_CENT_PRO_KWH = 0.1624
 
     def berechne_messleistungskosten(kw):
         if kw <= 105:
@@ -182,11 +190,10 @@ elif funktion == "Fernwärmekostenberechnung":
         grundkosten = anschlussleistung_kw * GRUNDPREIS_EURO_PRO_KW_JAHR
         messleistungskosten = berechne_messleistungskosten(anschlussleistung_kw)
         waermezaehler_kosten = WAERMEZAEHLER_MONATLICH * 12
-        oekobeitrag = verbrauch_kwh * (OEKO_SATZ_CENT_PRO_KWH / 100)
 
         zwischensumme = energiekosten + grundkosten + messleistungskosten + waermezaehler_kosten
-        benutzungsabgabe = (zwischensumme + oekobeitrag) * 0.06
-        netto_gesamt = zwischensumme + oekobeitrag + benutzungsabgabe
+        benutzungsabgabe = zwischensumme * 0.06
+        netto_gesamt = zwischensumme + benutzungsabgabe
         mehrwertsteuer = netto_gesamt * 0.20
         brutto_gesamt = netto_gesamt + mehrwertsteuer
 
@@ -197,7 +204,6 @@ elif funktion == "Fernwärmekostenberechnung":
         <b>Grundpreis:</b> {grundkosten:.2f} €<br>
         <b>Messleistungskosten:</b> {messleistungskosten:.2f} €<br>
         <b>Wärmezählerkosten:</b> {waermezaehler_kosten:.2f} €<br>
-        <b>Öko- und Umweltbeitrag:</b> {oekobeitrag:.2f} €<br>
         <b>Benutzungsabgabe (6%):</b> {benutzungsabgabe:.2f} €<br>
         <b>Netto gesamt:</b> {netto_gesamt:.2f} €<br>
         <b>Mehrwertsteuer (20%):</b> {mehrwertsteuer:.2f} €<br>
@@ -208,3 +214,4 @@ elif funktion == "Fernwärmekostenberechnung":
         st.info("Hinweis: Diese Berechnung basiert auf den eingegebenen Werten und aktuellen Tarifinformationen. "
                 "Sie stellt keine rechtsverbindliche Auskunft dar und dient ausschließlich einer Prognose. "
                 "Fehler in den Daten können nicht ausgeschlossen werden.")
+
