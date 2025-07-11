@@ -61,14 +61,25 @@ st.markdown(
         background-color: #FFEFE0 !important;
         color: #333333 !important;
     }}
-    div[data-baseweb="popover"] {{
-        background-color: white !important;
-        color: #333333 !important;
-        border: 1.5px solid {KRÄFTIG_ORANGE} !important;
-        border-radius: 6px !important;
-    }}
-    .css-1dimb5e-singleValue {{
-        color: {DUNKELGRAU} !important;
+div[data-baseweb="popover"] {{
+    background-color: white !important;
+    color: {DUNKELGRAU} !important;
+    border: 1.5px solid {KRÄFTIG_ORANGE} !important;
+    border-radius: 6px !important;
+}}
+
+.css-1xc3v61-menu {{
+    background-color: white !important;
+    border: 1.5px solid {KRÄFTIG_ORANGE} !important;
+    border-radius: 6px !important;
+    color: {DUNKELGRAU} !important;
+}}
+
+.css-1n76uvr-control {{
+    background-color: white !important;
+    color: {DUNKELGRAU} !important;
+}}
+
     }}
     label, .stTextInput label, .stNumberInput label {{
         color: {DUNKELGRAU} !important;
