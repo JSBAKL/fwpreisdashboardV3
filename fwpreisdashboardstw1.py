@@ -78,6 +78,15 @@ st.markdown(
         font-weight: 500 !important;
     }}
     </style>
+    <style>
+div[data-baseweb="select"]:focus-within {
+    background-color: white !important;
+    color: #333333 !important;
+    border: 1.5px solid #FF6A00 !important;
+    box-shadow: none !important;
+}
+</style>
+
     """,
     unsafe_allow_html=True
 )
