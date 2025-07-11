@@ -16,10 +16,20 @@ st.markdown(
     .stApp {{
         background-color: {HINTERGRUND};
     }}
-    h1, h2, h3 {{
+    h1 {{
         color: {KRÄFTIG_ORANGE};
         font-size: 28px !important;
         font-weight: 700 !important;
+    }}
+    h2 {{
+        color: {KRÄFTIG_ORANGE};
+        font-size: 20px !important;
+        font-weight: 600 !important;
+    }}
+    h3 {{
+        color: {KRÄFTIG_ORANGE};
+        font-size: 18px !important;
+        font-weight: 600 !important;
     }}
     .block-container {{
         padding-top: 2rem;
@@ -74,6 +84,7 @@ if pass_eingabe != PASSWORT:
 
 # --- Titel ---
 st.title("Fernwärmekostenberechnung pro Jahr")
+st.subheader("Ausgabe auf Basis Preisblatt gültig ab 010924 -rabattiert-nach")
 
 # --- Konstante Preise ---
 ENERGIEPREIS_CENT_PRO_KWH = 8.0469     # in Cent
@@ -118,7 +129,7 @@ if anschlussleistung_kw > 0 and verbrauch_kwh > 0:
     brutto_gesamt = netto_gesamt + mehrwertsteuer
 
     # --- Ausgabe ---
-    st.subheader("Werte auf Basis Preisblatt gültig ab 010924 rabattiert nach")
+    st.subheader("Kostenaufstellung Fernwärme")
     col1, col2 = st.columns(2)
     with col1:
         st.write(f"Energiekosten:")
