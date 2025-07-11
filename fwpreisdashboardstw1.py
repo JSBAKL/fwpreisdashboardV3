@@ -134,18 +134,55 @@ elif funktion == "kWh → Pellets":
 
 elif funktion == "Fernwärmekostenberechnung":
     st.header("Fernwärmekostenberechnung pro Jahr")
-    verbrauch = st.number_input("Jahresverbrauch in kWh:", min_value=0.0, step=100.0)
-    arbeitspreis = st.number_input("Arbeitspreis in Cent/kWh:", value=10.0, step=0.1)
-    grundpreis = st.number_input("Grundpreis pro Jahr in €:", value=120.0, step=10.0)
-    rabatt_prozent = st.number_input("Rabatt in % (falls vorhanden):", value=0.0, step=1.0)
 
-    if verbrauch and arbeitspreis >= 0:
-        kosten_arbeitspreis = verbrauch * (arbeitspreis / 100)
-        rabatt_betrag = kosten_arbeitspreis * (rabatt_prozent / 100)
-        gesamt = kosten_arbeitspreis + grundpreis - rabatt_betrag
+    anschlussleistung_kw = st.number_input("Anschlussleistung (kW):", min_value=0.0, step=1.0)
+    verbrauch_kwh = st.number_input("Jahresverbrauch (kWh):", min_value=0.0, step=100.0)
 
-        st.subheader("Ausgabe auf Basis Preisblatt gültig ab 010924 – rabattiert – nach")
-        st.success(f"Gesamtkosten pro Jahr: **{gesamt:.2f} €**")
+    ENERGIEPREIS_CENT_PRO_KWH = 8.0469
+    GRUNDPREIS_EURO_PRO_KW_JAHR = 42.9324
+    WAERMEZAEHLER_MONATLICH = 2.8414
+    OEKO_SATZ_CENT_PRO_KWH = 0.1624
+
+    def berechne_messleistungskosten(kw):
+        if kw <= 105:
+            return 8.8986 * 12
+        elif kw <= 245:
+            return 17.1616 * 12
+        elif kw <= 420:
+            return 21.6109 * 12
+        elif kw <= 1050:
+            return 26.0602 * 12
+        elif kw <= 1750:
+            return 28.6027 * 12
+        else:
+            return 28.6027 * 12
+
+    if anschlussleistung_kw > 0 and verbrauch_kwh > 0:
+        energiekosten = verbrauch_kwh * (ENERGIEPREIS_CENT_PRO_KWH / 100)
+        grundkosten = anschlussleistung_kw * GRUNDPREIS_EURO_PRO_KW_JAHR
+        messleistungskosten = berechne_messleistungskosten(anschlussleistung_kw)
+        waermezaehler_kosten = WAERMEZAEHLER_MONATLICH * 12
+        oekobeitrag = verbrauch_kwh * (OEKO_SATZ_CENT_PRO_KWH / 100)
+
+        zwischensumme = energiekosten + grundkosten + messleistungskosten + waermezaehler_kosten
+        benutzungsabgabe = (zwischensumme + oekobeitrag) * 0.06
+        netto_gesamt = zwischensumme + oekobeitrag + benutzungsabgabe
+        mehrwertsteuer = netto_gesamt * 0.20
+        brutto_gesamt = netto_gesamt + mehrwertsteuer
+
+        st.subheader("Ausgabe auf Basis Preisblatt gültig ab 01.09.2024 – rabattiert – nach")
+        st.success(f"""
+        Energiekosten: {energiekosten:.2f} €  
+        Grundpreis: {grundkosten:.2f} €  
+        Messleistungskosten: {messleistungskosten:.2f} €  
+        Wärmezählerkosten: {waermezaehler_kosten:.2f} €  
+        Öko- und Umweltbeitrag: {oekobeitrag:.2f} €  
+        Benutzungsabgabe (6%): {benutzungsabgabe:.2f} €  
+        Netto gesamt: {netto_gesamt:.2f} €  
+        Mehrwertsteuer (20%): {mehrwertsteuer:.2f} €  
+        **Bruttokosten pro Jahr: {brutto_gesamt:.2f} €**
+        """)
+
         st.info("Hinweis: Diese Berechnung basiert auf den eingegebenen Werten und aktuellen Tarifinformationen. "
                 "Sie stellt keine rechtsverbindliche Auskunft dar und dient ausschließlich einer Prognose. "
                 "Fehler in den Daten können nicht ausgeschlossen werden.")
