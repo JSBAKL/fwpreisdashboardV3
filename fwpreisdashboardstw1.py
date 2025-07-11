@@ -7,6 +7,7 @@ DUNKELGRAU = "#333333"  # dunkleres Grau
 HINTERGRUND = "#F9F9F9"
 
 # --- Design-Anpassung via HTML/CSS ---
+# --- Design-Anpassung via HTML/CSS ---
 st.markdown(
     f"""
     <style>
@@ -33,18 +34,21 @@ st.markdown(
         background-color: white !important;
         border: 4px solid {STW_ORANGE} !important;
         color: {DUNKELGRAU} !important;
-        font-weight: 500;
+        font-weight: 600 !important;
+        font-size: 16px !important;
     }}
-    .stTextInput input {{
-        border: 4px solid {STW_ORANGE};
-    }}
-    .stNumberInput input {{
-        border: 4px solid {STW_ORANGE};
+    .stTextInput > div > input, .stNumberInput input {{
+        border: 4px solid {STW_ORANGE} !important;
+        color: {DUNKELGRAU} !important;
+        background-color: white !important;
+        font-weight: 600 !important;
+        font-size: 16px !important;
     }}
     </style>
     """,
     unsafe_allow_html=True
 )
+
 
 # --- Passwortschutz ---
 PASSWORT = "fernwaerme2025"
