@@ -63,7 +63,7 @@ st.markdown(
     }}
 div[data-baseweb="popover"] {{
     background-color: white !important;
-    color: {ROT} !important;
+    color: {WHITE} !important;
     border: 1.5px solid {KRÄFTIG_ORANGE} !important;
     border-radius: 6px !important;
 }}
