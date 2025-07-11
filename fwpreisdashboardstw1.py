@@ -1,11 +1,3 @@
-import streamlit as st
-
-# Farbdefinitionen (angepasst)
-KRÄFTIG_ORANGE = "#FF6A00"  # Kräftiges Orange ohne Schwarzanteil
-DUNKELGRAU = "#333333"         # Gut lesbares Dunkelgrau
-HINTERGRUND = "#F9F9F9"       # Heller Hintergrund
-
-# --- Design-Anpassung via HTML/CSS ---
 st.markdown(
     f"""
     <style>
@@ -32,7 +24,7 @@ st.markdown(
         color: white;
         border-radius: 8px;
     }}
-    input {{
+    input[type="text"], input[type="number"], input[type="password"] {{
         background-color: white !important;
         border: 3px solid {KRÄFTIG_ORANGE} !important;
         color: {DUNKELGRAU} !important;
@@ -74,6 +66,7 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
 
 # --- Passwortschutz ---
 PASSWORT = "fernwaerme2025"
