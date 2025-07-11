@@ -3,7 +3,7 @@ import streamlit as st
 # Farbdefinitionen (STW-Farben)
 STW_TUERKIS = "#00B2A9"
 STW_ORANGE = "#F39200"
-DUNKELGRAU = "#222222"
+DUNKELGRAU = "#111111"  # dunkleres Grau
 HINTERGRUND = "#F9F9F9"
 
 # --- Design-Anpassung via HTML/CSS ---
@@ -31,14 +31,15 @@ st.markdown(
     }}
     input {{
         background-color: white !important;
-        border: 2px solid {STW_ORANGE} !important;
+        border: 3px solid {STW_ORANGE} !important;
         color: {DUNKELGRAU} !important;
+        font-weight: 500;
     }}
     .stTextInput input {{
-        border: 2px solid {STW_ORANGE};
+        border: 3px solid {STW_ORANGE};
     }}
     .stNumberInput input {{
-        border: 2px solid {STW_ORANGE};
+        border: 3px solid {STW_ORANGE};
     }}
     </style>
     """,
