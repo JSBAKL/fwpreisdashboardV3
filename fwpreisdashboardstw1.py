@@ -10,11 +10,11 @@ st.markdown(
     f"""
     <style>
     body {{
-        background-color: {HINTERGRUND};
-        color: {DUNKELGRAU};
+        background-color: #EFEFEF;
+        color: #000000;
     }}
     .stApp {{
-        background-color: {HINTERGRUND};
+        background-color: #EFEFEF;
     }}
     h1, h2, h3 {{
         color: {STW_TUERKIS};
@@ -27,11 +27,20 @@ st.markdown(
         background-color: {STW_TUERKIS};
         color: white;
         border-radius: 8px;
+        border: none;
+        padding: 0.5em 1.5em;
+        font-weight: bold;
+        transition: 0.3s;
+    }}
+    .stButton > button:hover {{
+        background-color: #00938D;
+        color: #fff;
     }}
     </style>
     """,
     unsafe_allow_html=True
 )
+
 
 # --- Passwortschutz ---
 PASSWORT = "fernwaerme2025"
