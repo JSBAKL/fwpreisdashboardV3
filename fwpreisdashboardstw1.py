@@ -91,7 +91,8 @@ if not st.session_state.passwort_ok:
     pass_eingabe = st.text_input("Bitte Passwort eingeben:", type="password")
     if pass_eingabe == PASSWORT:
         st.session_state.passwort_ok = True
-        st.experimental_rerun()
+        st.success("Zugang gewährt. Die App wird jetzt freigeschaltet.")
+        st.stop()
     elif pass_eingabe:
         st.warning("Zugriff verweigert. Bitte gültiges Passwort eingeben.")
     st.stop()
