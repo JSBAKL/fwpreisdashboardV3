@@ -1,11 +1,9 @@
 import streamlit as st
-import pdfkit
-import base64
 
 # Farbdefinitionen (angepasst)
-KRÄFTIG_ORANGE = "#FF6A00"  # Kräftiges Orange ohne Schwarzanteil
-DUNKELGRAU = "#333333"         # Gut lesbares Dunkelgrau
-HINTERGRUND = "#F9F9F9"       # Heller Hintergrund
+KRÄFTIG_ORANGE = "#FF6A00"
+DUNKELGRAU = "#333333"
+HINTERGRUND = "#F9F9F9"
 
 # --- Design-Anpassung via HTML/CSS ---
 st.markdown(
@@ -86,7 +84,6 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# --- Passwortschutz mit Session-State ---
 PASSWORT = "fernwaerme2025"
 if "passwort_ok" not in st.session_state:
     st.session_state.passwort_ok = False
@@ -101,7 +98,6 @@ if not st.session_state.passwort_ok:
         st.warning("Zugriff verweigert. Bitte gültiges Passwort eingeben.")
     st.stop()
 
-# --- Funktionsauswahl ---
 funktion = st.selectbox("Funktion auswählen:", [
     "Fernwärmekostenberechnung",
     "Heizöl → kWh & kW",
@@ -110,7 +106,6 @@ funktion = st.selectbox("Funktion auswählen:", [
     "kWh → Pellets"
 ])
 
-# --- Funktionslogik ---
 if funktion == "Heizöl → kWh & kW":
     liter = st.number_input("Verbrauch in Liter Heizöl pro Jahr:", min_value=0.0, step=10.0)
     if liter:
@@ -175,7 +170,7 @@ elif funktion == "Fernwärmekostenberechnung":
         mehrwertsteuer = netto_gesamt * 0.20
         brutto_gesamt = netto_gesamt + mehrwertsteuer
 
-        st.subheader("Ausgabe auf Basis Preisblatt gültig ab 01.09.2024 – rabattiert – nach")
+        st.subheader("Ausgabe auf Basis des gültigen Preisblatts")
         ausgabe_text = f"""
         <h3>Ergebnisse</h3>
         <p><b>Energiekosten:</b> {energiekosten:.2f} €<br>
