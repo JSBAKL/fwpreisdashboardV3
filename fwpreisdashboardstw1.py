@@ -118,7 +118,7 @@ if anschlussleistung_kw > 0 and verbrauch_kwh > 0:
     brutto_gesamt = netto_gesamt + mehrwertsteuer
 
     # --- Ausgabe ---
-    st.subheader("Kostenaufstellung Fernwärme")
+    st.subheader("Kostenaufstellung auf Basis Preisblatt gültig ab 010924 nach")
     col1, col2 = st.columns(2)
     with col1:
         st.write(f"Energiekosten:")
